@@ -1,4 +1,5 @@
 import javax.swing.*;
+import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 
@@ -14,6 +15,7 @@ public class mainWindow extends JDialog {
     private JButton Loginbutton;
 
     public mainWindow() {
+        setAlwaysOnTop(true);
         setResizable(false);
         setContentPane(contentPane);
 
@@ -46,7 +48,6 @@ public class mainWindow extends JDialog {
     }
 
     public static void main(String[] args) {
-
 
 
         mainWindow window = new mainWindow();

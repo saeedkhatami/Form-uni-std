@@ -5,6 +5,7 @@ import com.mongodb.client.MongoDatabase;
 import org.bson.Document;
 
 import javax.swing.*;
+import java.awt.*;
 import java.awt.event.*;
 
 public class registrationForm extends JDialog {
@@ -30,6 +31,8 @@ public class registrationForm extends JDialog {
     private JLabel emailLabel;
 
     public registrationForm() {
+        setAlwaysOnTop(true);
+        setTitle("ثبت نام");
         setResizable(false);
         setContentPane(contentPane);
         setModal(true);
@@ -101,18 +104,19 @@ public class registrationForm extends JDialog {
             // Get the collection
             MongoCollection<Document> collection = database.getCollection("Students");
 
-            Document document = new Document("First name", stdmdl.getFirstName())
-                    .append("Last name", stdmdl.getLastName())
+            Document document = new Document("firstname", stdmdl.getFirstName())
+                    .append("lastname", stdmdl.getLastName())
                     .append("email", stdmdl.getEmail())
-                    .append("Field of study", stdmdl.getField())
-                    .append("Year of birth", stdmdl.getYearOfBirth())
-                    .append("Month of birth", stdmdl.getMonthOfBirth())
-                    .append("day of birth", stdmdl.getDayOfBirth())
+                    .append("fieldOfStudy", stdmdl.getField())
+                    .append("yearOfBirth", stdmdl.getYearOfBirth())
+                    .append("monthOfBirth", stdmdl.getMonthOfBirth())
+                    .append("dayOfBirth", stdmdl.getDayOfBirth())
                     .append("idNumber", stdmdl.getIdNumber())
                     .append("password", null);
 
             //Inserting document into the collection
             collection.insertOne(document);
+            System.out.println("**Registered successfully**");
             idPass idPass = new idPass(stdmdl.getIdNumber());
             dispose();
             idPass.pack();

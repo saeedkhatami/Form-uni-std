@@ -1,3 +1,12 @@
+import com.mongodb.DBObject;
+import com.mongodb.client.FindIterable;
+import com.mongodb.client.MongoClient;
+import com.mongodb.client.MongoClients;
+import com.mongodb.client.MongoCollection;
+import com.mongodb.client.MongoDatabase;
+import com.mongodb.client.model.Filters;
+import org.bson.Document;
+
 import javax.swing.*;
 import java.awt.event.*;
 
@@ -11,6 +20,8 @@ public class loginForm extends JDialog {
     private JLabel idLabel;
 
     public loginForm() {
+        setAlwaysOnTop(true);
+        setTitle("ورود");
         setResizable(false);
         setContentPane(contentPane);
         setModal(true);
@@ -45,7 +56,51 @@ public class loginForm extends JDialog {
     }
 
     private void onOK() {
+        if (idField.getText().isEmpty()
+                || passwordField.getPassword().length == 0) {
+            JOptionPane.showMessageDialog(null, "لطفا نام کاربری و رمزعبور خود را کامل وارد کنید.");
+        }
+        Long id = Long.valueOf(0);
+        String password = "";
+        if (!idField.getText().isEmpty()
+                && passwordField.getPassword().length > 0) {
+
+            // Creating a Mongo client
+            MongoClient mongoClient = MongoClients.create("mongodb://docker:mongopw@localhost:49153");
+            MongoDatabase database = mongoClient.getDatabase("formDB");
+
+            // Get the collection
+            MongoCollection<Document> collection = database.getCollection("Students");
+
+            // Select a particular document
+            FindIterable<Document> documents = collection.find(Filters.eq("idNumber", Long.parseLong(idField.getText())));
+
+            for (Document document : documents) {
+                Document idPass = new Document(document);
+
+                id = (Long) idPass.get("idNumber");
+                password = (String) idPass.get("password");
+
+                System.out.println(id);
+                System.out.println(password);
+            }
+            Long typedUserID = Long.parseLong(idField.getText());
+            String typedUserPassword = String.valueOf(passwordField.getPassword());
+            if (typedUserID.equals(id)
+                    && typedUserPassword.equals(password)) {
+                JOptionPane.showMessageDialog(null, "صحیح میباشد");
+            }
+            if (!typedUserID.equals(id)
+                    || !typedUserPassword.equals(password)) {
+                JOptionPane.showMessageDialog(null, "صحیح نمیباشد");
+            }
+
+        }
         // add your code here
+        studentInfo student = new studentInfo(id, password);
+        student.pack();
+        student.setVisible(true);
+
         dispose();
     }
 

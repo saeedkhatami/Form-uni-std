@@ -36,7 +36,7 @@ public class StudentModel {
     }
 
     public String setPass() {
-        idGenerator id = new idGenerator();
+        passwordGenerator id = new passwordGenerator();
         this.pass = id.generate();
         return id.generate();
     }

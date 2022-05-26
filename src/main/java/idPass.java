@@ -19,9 +19,12 @@ public class idPass extends JDialog {
     private JLabel noticeLabel;
     private JTextPane idPane;
     private JTextPane passPane;
+    private JButton loginBut;
 
     public idPass(Long idnumber) {
+        setAlwaysOnTop(true);
         setResizable(false);
+        setTitle("اطلاعات ورود");
         setContentPane(contentPane);
         setModal(true);
         getRootPane().setDefaultButton(buttonOK);
@@ -38,15 +41,10 @@ public class idPass extends JDialog {
         // Find all documents
         collection.updateOne(Filters.eq("idNumber", idnumber),
                 Updates.set("password", pass));
-        System.out.println("Document Updated.");
         System.out.println("***Updated Document***");
 
         // Select a particular document
         FindIterable<Document> documents = collection.find(Filters.eq("idNumber", idnumber));
-
-        for (Document document : documents) {
-            System.out.println(document);
-        }
 
         idPane.setText(Long.toString(idnumber));
         passPane.setText(pass);
@@ -60,6 +58,13 @@ public class idPass extends JDialog {
 
     private void onOK() {
         // add your code here
+        dispose();
+    }
+
+    private void onLogin(){
+        loginForm login = new loginForm();
+        login.pack();
+        login.setVisible(true);
         dispose();
     }
 }
