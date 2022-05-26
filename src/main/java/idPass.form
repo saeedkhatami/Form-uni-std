@@ -94,6 +94,7 @@
             <properties>
               <caretColor color="-4473925"/>
               <editable value="false"/>
+              <font style="1"/>
               <foreground color="-4473925"/>
             </properties>
           </component>
@@ -107,6 +108,7 @@
               <caretColor color="-4473925"/>
               <editable value="false"/>
               <enabled value="true"/>
+              <font style="1"/>
               <foreground color="-4473925"/>
               <selectedTextColor color="-460558"/>
             </properties>
