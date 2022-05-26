@@ -80,28 +80,24 @@ public class loginForm extends JDialog {
 
                 id = (Long) idPass.get("idNumber");
                 password = (String) idPass.get("password");
-
-                System.out.println(id);
-                System.out.println(password);
             }
             Long typedUserID = Long.parseLong(idField.getText());
             String typedUserPassword = String.valueOf(passwordField.getPassword());
             if (typedUserID.equals(id)
                     && typedUserPassword.equals(password)) {
-                JOptionPane.showMessageDialog(null, "صحیح میباشد");
+                dispose();
+                studentInfo student = new studentInfo(id, password);
+                student.pack();
+                student.setVisible(true);
             }
             if (!typedUserID.equals(id)
                     || !typedUserPassword.equals(password)) {
-                JOptionPane.showMessageDialog(null, "صحیح نمیباشد");
+                JOptionPane.showMessageDialog(null, "نام کاربری یا رمز ورود درست نیست");
             }
 
         }
         // add your code here
-        studentInfo student = new studentInfo(id, password);
-        student.pack();
-        student.setVisible(true);
 
-        dispose();
     }
 
     private void onCancel() {

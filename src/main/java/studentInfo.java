@@ -3,6 +3,8 @@ import com.mongodb.client.model.Filters;
 import org.bson.Document;
 
 import javax.swing.*;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
 
 public class studentInfo extends JDialog {
     private JPanel contentPane;
@@ -67,5 +69,15 @@ public class studentInfo extends JDialog {
         monthVar.setText(String.valueOf(month));
         dayVar.setText(String.valueOf(day));
         idnumberVar.setText(String.valueOf(idS));
+        buttonOK.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                onOk();
+            }
+        });
+    }
+
+    private void onOk() {
+        dispose();
     }
 }

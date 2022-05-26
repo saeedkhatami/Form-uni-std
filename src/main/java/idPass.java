@@ -54,6 +54,12 @@ public class idPass extends JDialog {
                 onOK();
             }
         });
+        loginBut.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                onLogin();
+            }
+        });
     }
 
     private void onOK() {
@@ -62,9 +68,9 @@ public class idPass extends JDialog {
     }
 
     private void onLogin(){
+        dispose();
         loginForm login = new loginForm();
         login.pack();
         login.setVisible(true);
-        dispose();
     }
 }
