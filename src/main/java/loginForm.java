@@ -94,10 +94,7 @@ public class loginForm extends JDialog {
                     || !typedUserPassword.equals(password)) {
                 JOptionPane.showMessageDialog(null, "نام کاربری یا رمز ورود درست نیست");
             }
-
         }
-        // add your code here
-
     }
 
     private void onCancel() {
